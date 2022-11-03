@@ -12,11 +12,12 @@ class UserTable extends React.Component {
     }
 
     openModal = (user) => {
-        let currentUser = user;
+        let currentUserTemp = user;
         this.setState({
             isOpen: true,
-            currentUser: currentUser
+            currentUser: currentUserTemp
         })
+        console.log("Debug 3:", this.state);
     };
     closeModal = () => this.setState({ isOpen: false });
     handleSubmit = (name) => {
@@ -24,12 +25,13 @@ class UserTable extends React.Component {
         // this.setState({ isOpen: true });
         this.closeModal()
     }
-    handleBtnEditUser = (user) => {
-        this.props.editUser(user);
-    }
-
+    // handleBtnEditUser = (user) => {
+    //     this.props.editUser(user);
+    // }
     render() {
-        let { listUsers } = this.props
+        console.log('Debug 2:', this.state.currentUser);
+        let listUsers = this.props.MyListUsers
+        console.log('Debug4', this.props);
         return (
             <>
                 <div className="userTable">
@@ -52,7 +54,6 @@ class UserTable extends React.Component {
                                         <td>{item['first_name']}</td>
                                         <td>{item['last_name']}</td>
                                         <td>
-                                            {/* <Button onClick={() => this.handleBtnEditUser(item)} style={{ color: "black", background: "yellow" }} variant="secondary" size="lg" active> */}
                                             <Button onClick={() => this.openModal(item)} style={{ color: "black", background: "yellow" }} variant="secondary" size="lg" active>
                                                 Edit
                                             </Button>	&nbsp;

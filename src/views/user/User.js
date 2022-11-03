@@ -14,21 +14,23 @@ class User extends React.Component {
         }
         )
     }
-    editUser = (user) => {
-        let { listUsers } = this.state
-        let indexUser = listUsers.findIndex((element) => element.id === user.id);
-        listUsers[indexUser] = user;
-        this.setState({
-            listUsers: listUsers
-        });
-        console.log(this.state)
-    }
+    // editUser = (user) => {
+    //     let { listUsers } = this.state
+    //     let indexUser = listUsers.findIndex((element) => element.id === user.id);
+    //     listUsers[indexUser] = user;
+    //     this.setState({
+    //         listUsers: listUsers
+    //     });
+    //     console.log(this.state)
+    // }
     render() {
+        console.log("Debug 5:", this.state.listUsers);
+        let listUsersTemp = this.state.listUsers;
         return (
             <div className="user">
                 <UserTable
-                    listUsers={this.state.listUsers}
-                    editUser={this.editUser}
+                    MyListUsers={listUsersTemp}
+                // editUser={this.editUser}
                 />
             </div>
         )

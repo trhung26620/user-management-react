@@ -14,14 +14,23 @@ class EditForm extends React.Component {
             user: userTemp
         }
         )
-        console.log(this.state)
     }
 
     handleChangeFirstName = (event) => {
-
+        let userTemp = this.state.user
+        userTemp.first_name = event.target.value
+        this.setState({
+            user: userTemp
+        }
+        )
     }
     handleChangeLastName = (event) => {
-
+        let userTemp = this.state.user
+        userTemp.last_name = event.target.value
+        this.setState({
+            user: userTemp
+        }
+        )
     }
     // this.setState({
     //     user: this.props.currentUser
@@ -43,14 +52,14 @@ class EditForm extends React.Component {
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" value={selectedUser.email} onChange={(event) => this.handleChangeEmail(event)} />
                         </Form.Group>
-                        {/* <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Your First Name" value={selectedUser.first_name} />
+                            <Form.Control type="text" placeholder="Enter Your First Name" value={selectedUser.first_name} onChange={(event) => this.handleChangeFirstName(event)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Your Last Name" value={selectedUser.last_name} />
-                        </Form.Group> */}
+                            <Form.Control type="text" placeholder="Enter Your Last Name" value={selectedUser.last_name} onChange={(event) => this.handleChangeLastName(event)} />
+                        </Form.Group>
                     </Form>
                     <Modal.Footer>
                         <Button variant="primary" onClick={() => this.props.closeModal()}>
