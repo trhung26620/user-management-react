@@ -5,7 +5,9 @@ import axios from "axios";
 
 class User extends React.Component {
     state = {
-        listUsers: []
+        listUsers: [
+            // { id: "1", email: "michael.lawson@reqres.in", first_name: "Michael", last_name: "Lawson" }
+        ]
     }
     async componentDidMount() {
         let res = await axios.get('https://reqres.in/api/users?page=2');
@@ -14,22 +16,22 @@ class User extends React.Component {
         }
         )
     }
-    // editUser = (user) => {
-    //     let { listUsers } = this.state
-    //     let indexUser = listUsers.findIndex((element) => element.id === user.id);
-    //     listUsers[indexUser] = user;
-    //     this.setState({
-    //         listUsers: listUsers
-    //     });
-    //     console.log(this.state)
-    // }
+    editUser = (user) => {
+        let { listUsers } = this.state
+        let indexUser = listUsers.findIndex((element) => element.id === user.id);
+        listUsers[indexUser] = user;
+        this.setState({
+            listUsers: listUsers
+        });
+        console.log(this.state)
+    }
     render() {
-        console.log("Debug 5:", this.state.listUsers);
-        let listUsersTemp = this.state.listUsers;
+        // console.log("Debug 5:", this.state.listUsers);
+        let { listUsers } = this.state;
         return (
             <div className="user">
                 <UserTable
-                    MyListUsers={listUsersTemp}
+                    listUsers={listUsers}
                 // editUser={this.editUser}
                 />
             </div>

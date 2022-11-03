@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 class EditForm extends React.Component {
+    // currentUser = this.props.currentUser
     state = {
         user: this.props.currentUser
+        // user: { id: "1", email: "michael.lawson@reqres.in", first_name: "Michael", last_name: "Lawson" }
     }
     handleChangeEmail = (event) => {
         let userTemp = this.state.user

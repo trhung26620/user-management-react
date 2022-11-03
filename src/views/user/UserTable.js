@@ -9,13 +9,14 @@ class UserTable extends React.Component {
     state = {
         isOpen: false,
         currentUser: {}
+        // currentUser: { id: "1", email: "michael.lawson@reqres.in", first_name: "Michael", last_name: "Lawson" }
     }
 
     openModal = (user) => {
-        let currentUserTemp = user;
+        let userTemp = { ...user };
         this.setState({
             isOpen: true,
-            currentUser: currentUserTemp
+            currentUser: userTemp
         })
         console.log("Debug 3:", this.state);
     };
@@ -29,9 +30,9 @@ class UserTable extends React.Component {
     //     this.props.editUser(user);
     // }
     render() {
-        console.log('Debug 2:', this.state.currentUser);
-        let listUsers = this.props.MyListUsers
-        console.log('Debug4', this.props);
+        // console.log('Debug 2:', this.state.currentUser);
+        let listUsers = this.props.listUsers
+        // console.log('Debug4', this.props);
         return (
             <>
                 <div className="userTable">
