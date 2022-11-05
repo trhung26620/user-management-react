@@ -3,13 +3,19 @@ import Table from 'react-bootstrap/Table';
 import './UserTable.scss'
 import Button from 'react-bootstrap/Button';
 import EditForm from "./EditForm";
-import Test from "./Test";
+// import Test from "./Test";
+import Confirm from "./Confirm";
+import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSort } from "@fortawesome/free-solid-svg-icons";
+// import Paging from "./Paging";
 
 class UserTable extends React.Component {
     state = {
         isOpen: false,
-        currentUser: {}
-        // currentUser: { id: "1", email: "michael.lawson@reqres.in", first_name: "Michael", last_name: "Lawson" }
+        currentUser: {},
+        delConfirm: false,
+        // openAddForm: false
     }
 
     openModal = (user) => {
@@ -18,31 +24,38 @@ class UserTable extends React.Component {
             isOpen: true,
             currentUser: userTemp
         })
-        console.log("Debug 3:", this.state);
     };
-    closeModal = () => this.setState({ isOpen: false });
-    handleSubmit = (name) => {
-        console.log("finish")
-        // this.setState({ isOpen: true });
-        this.closeModal()
+    openDelConfirm = (user) => {
+        let userTemp = { ...user };
+        this.setState({
+            delConfirm: true,
+            currentUser: userTemp
+        })
+    };
+    closeModal = () => this.setState({ isOpen: false, delConfirm: false });
+    // closeConfirm = () => this.setState({ delConfirm: false });
+    handleSubmit = (user) => {
+        this.props.editUser(user);
+        this.closeModal();
+        toast.success("Updated successfully!");
     }
-    // handleBtnEditUser = (user) => {
-    //     this.props.editUser(user);
-    // }
+    handleDeleteUser = () => {
+        this.props.deleteUser(this.state.currentUser);
+        this.setState({ delConfirm: false });
+        toast.success("Deleted successfully!");
+    }
     render() {
-        // console.log('Debug 2:', this.state.currentUser);
         let listUsers = this.props.listUsers
-        // console.log('Debug4', this.props);
         return (
             <>
                 <div className="userTable">
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>ID <span onClick={() => this.props.sortWithId()} style={{ paddingLeft: '20px' }}><FontAwesomeIcon icon={faSort} /></span></th>
                                 <th>Email</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>First Name <span onClick={() => this.props.sortWithFirstName()} style={{ paddingLeft: '20px' }}><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th>Last Name </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -50,7 +63,7 @@ class UserTable extends React.Component {
                             {listUsers && listUsers.map((item, index) => {
                                 return (
                                     <tr key={item.id}>
-                                        <td>{index + 1}</td>
+                                        <td>{item.id}</td>
                                         <td>{item['email']}</td>
                                         <td>{item['first_name']}</td>
                                         <td>{item['last_name']}</td>
@@ -58,7 +71,7 @@ class UserTable extends React.Component {
                                             <Button onClick={() => this.openModal(item)} style={{ color: "black", background: "yellow" }} variant="secondary" size="lg" active>
                                                 Edit
                                             </Button>	&nbsp;
-                                            <Button style={{ background: "red" }} variant="secondary" size="lg" active>
+                                            <Button onClick={() => this.openDelConfirm(item)} style={{ background: "red" }} variant="secondary" size="lg" active>
                                                 Delete
                                             </Button>
                                         </td>
@@ -78,7 +91,23 @@ class UserTable extends React.Component {
                         :
                         null
                     }
+                    {this.state.delConfirm ?
+                        <Confirm
+                            // closeConfirm={this.closeConfirm}
+                            closeModal={this.closeModal}
+                            delConfirm={this.state.delConfirm}
+                            handleDeleteUser={this.handleDeleteUser}
+                            currentUser={this.state.currentUser}
+                        />
+                        :
+                        null
+                    }
                 </div>
+                {/* <div className="paging">
+                    <Paging
+                    // numOfUser={this.state.searchedUsers.length}
+                    />
+                </div> */}
             </>
         )
     }

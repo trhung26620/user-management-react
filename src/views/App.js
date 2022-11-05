@@ -10,8 +10,12 @@ import {
   Link
 } from "react-router-dom";
 import React from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -27,6 +31,18 @@ function App() {
             </Route>
           </Switch>
         </header>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </Router>
   );

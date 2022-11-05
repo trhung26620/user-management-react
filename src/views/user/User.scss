@@ -1,7 +1,31 @@
 .user {
     // margin: 0 auto;
     display: flex;
-    // align-items: center;
-    justify-content: center
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+.searchUser{
+    width: 30%;
+    
+    // justify-content: center;
+    display: flex;
+    margin-left: 172px;
+    margin-right: 50px;
+}
+.advBtn{
+    // background-color: blue;
+    width: 20%;
+    margin-left: 400px;
 }
 
+.headComponent{
+    // background-color: aquamarine;
+    display: flex;
+    margin-top: 30px;
+}
+
+.paging{
+    display: flex;
+    justify-content: center;
+}
