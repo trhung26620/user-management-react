@@ -24,9 +24,6 @@ class User extends React.Component {
             searchedUsers: res && res.data.data ? res.data.data : [],
             userListForDisplay: res.data.data.slice(startIndex, startIndex + this.state.userPerPage)
         })
-        // this.filterEmail();
-
-        console.log("Debug 1:", this.state)
     }
     editUser = (user) => {
         let { listUsers, searchedUsers } = this.state
@@ -100,6 +97,12 @@ class User extends React.Component {
         });
         this.filterEmail(this.state.searchValue, [...listUsers, user]);
     }
+    importUser = (listUsers) => {
+        this.setState({
+            listUsers: listUsers
+        })
+        this.filterEmail(this.state.searchValue, listUsers);
+    }
     render() {
         let { userListForDisplay } = this.state;
         return (
@@ -114,6 +117,7 @@ class User extends React.Component {
                         <AdvanceBtn
                             addNewUser={this.addNewUser}
                             listUsers={this.state.listUsers}
+                            importUser={this.importUser}
                         />
                     </div>
 

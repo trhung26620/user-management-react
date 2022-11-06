@@ -35,7 +35,9 @@ class AdvanceBtn extends React.Component {
                 {/* <Button variant="primary" size="sm">
                     Export
                 </Button>&nbsp; */}
-                <ImportUser />&nbsp;
+                <ImportUser
+                    importUser={this.props.importUser}
+                />&nbsp;
                 <ExcelExport
                     excelData={this.props.listUsers}
                     fileName={"Users"} />&nbsp;

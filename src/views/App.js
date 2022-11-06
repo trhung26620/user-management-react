@@ -9,13 +9,34 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Login from './user/Login';
+import Test from './user/Test';
 
 function App() {
-
+  const [token, setToken] = useState();
+  if (!token) {
+    return (
+      <>
+        <Login setToken={setToken} />
+        {/* <Test /> */}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </>
+    )
+  }
   return (
     <Router>
       <div className="App">
