@@ -12,9 +12,6 @@ class Login extends Component {
         password: ""
     }
     async handleOnclickSignIn(event) {
-        event.preventDefault()
-        // console.log("state:", this.state);
-        // return
         try {
             let res = await axios.post('https://reqres.in/api/login', { email: this.state.email, password: this.state.password });
             console.log("res:", res);
@@ -23,7 +20,6 @@ class Login extends Component {
                     token: res.data.token
                 })
                 this.props.setToken(this.state.token);
-                toast.success("Login successfully!");
             }
         } catch (e) {
             toast.error("Invalid email or password!");
@@ -65,7 +61,8 @@ class Login extends Component {
         console.log(this.state)
         return (
             <div className="Auth-form-container">
-                <form className="Auth-form">
+                <div className='Auth-form'>
+                    {/* <form className="Auth-form"> */}
                     <div className="Auth-form-content">
                         <h3 className="Auth-form-title">Sign In</h3>
                         <div className="form-group mt-3">
@@ -95,7 +92,8 @@ class Login extends Component {
                             Forgot <a href="#">password?</a>
                         </p>
                     </div>
-                </form>
+                </div>
+                {/* </form> */}
             </div>
         );
     }
